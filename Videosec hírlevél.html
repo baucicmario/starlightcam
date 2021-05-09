@@ -20,7 +20,7 @@ h1{
 h2{
 	margin-bottom: 0px;
 	font-family: Georgia;
-	color: rgb(59, 64, 69);
+	color: white
 	font-size: 25px;
 	font-weight: 700;
 }
@@ -48,7 +48,7 @@ img{
 
 
 .container {
-  position: relative;
+ position: relative;
 }
 
 
@@ -92,25 +92,25 @@ img{
 }
 
 .text-block-left {
-  position: absolute;
-  bottom:10%;
-  left: 20px;
-  background-color: rgba(51, 51, 51, 0.253);
-  color: white;
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 30%;
+ position: absolute;
+ bottom:10%;
+ left: 20px;
+ background-color: rgba(51, 51, 51, 0.253);
+ color: white;
+ padding-left: 20px;
+ padding-right: 20px;
+ width: 30%;
 }
 
 .text-block-right {
-  position: absolute;
-  bottom:10%;
-  right: 20px;
-  background-color: rgba(51, 51, 51, 0.253);
-  color: white;
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 30%;
+ position: absolute;
+ bottom:10%;
+ right: 20px;
+ background-color: rgba(51, 51, 51, 0.253);
+ color: white;
+ padding-left: 20px;
+ padding-right: 20px;
+ width: 30%;
 }
 
 .text-h1-feher{
@@ -153,16 +153,16 @@ img{
 
 .button-blue{
 	background-color: rgb(0, 148, 247);
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
+ border: none;
+ color: white;
+ padding: 16px 32px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ font-size: 16px;
+ margin: 4px 2px;
+ transition-duration: 0.4s;
+ cursor: pointer;
 	border-radius: 30px;
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgb(0, 148, 247);
 }
@@ -175,16 +175,16 @@ img{
 
 .button-white{
 	background-color: white;
-  border: none;
-  color: rgb(0, 148, 247);
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
+ border: none;
+ color: rgb(0, 148, 247);
+ padding: 16px 32px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ font-size: 16px;
+ margin: 4px 2px;
+ transition-duration: 0.4s;
+ cursor: pointer;
 	border-radius: 30px;
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgb(0, 148, 247);
 }
@@ -207,6 +207,37 @@ img{
 
 
 
+.img-comp-container {
+ position: relative;
+ height: 540px; /*should be the same height as the images*/
+}
+
+.img-comp-img {
+ position: absolute;
+ width: auto;
+ height: auto;
+ overflow:hidden;
+}
+
+.img-comp-img img {
+ display:block;
+ vertical-align:middle;
+}
+
+.img-comp-slider {
+ position: absolute;
+ z-index:9;
+ cursor: ew-resize;
+ /*set the appearance of the slider:*/
+ width: 40px;
+ height: 40px;
+ background-color: rgb(0, 148, 247);
+ opacity: 0.7;
+ border-radius: 50%;
+}
+
+
+
 
 
 
@@ -218,22 +249,102 @@ img{
 
 html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a text sizeot javítja protrait*/}
 </style>
+
+
+
+
+<script>
+	function initComparisons() {
+	 var x, i;
+	 /*find all elements with an "overlay" class:*/
+	 x = document.getElementsByClassName("img-comp-overlay");
+	 for (i = 0; i < x.length; i++) {
+		/*once for each "overlay" element:
+		pass the "overlay" element as a parameter when executing the compareImages function:*/
+		compareImages(x[i]);
+	 }
+	 function compareImages(img) {
+		var slider, img, clicked = 0, w, h;
+		/*get the width and height of the img element*/
+		w = img.offsetWidth;
+		h = img.offsetHeight;
+		/*set the width of the img element to 50%:*/
+		img.style.width = (w / 2) + "px";
+		/*create slider:*/
+		slider = document.createElement("DIV");
+		slider.setAttribute("class", "img-comp-slider");
+		/*insert slider*/
+		img.parentElement.insertBefore(slider, img);
+		/*position the slider in the middle:*/
+		slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+		slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+		/*execute a function when the mouse button is pressed:*/
+		slider.addEventListener("mousedown", slideReady);
+		/*and another function when the mouse button is released:*/
+		window.addEventListener("mouseup", slideFinish);
+		/*or touched (for touch screens:*/
+		slider.addEventListener("touchstart", slideReady);
+		/*and released (for touch screens:*/
+		window.addEventListener("touchend", slideFinish);
+		function slideReady(e) {
+		 /*prevent any other actions that may occur when moving over the image:*/
+		 e.preventDefault();
+		 /*the slider is now clicked and ready to move:*/
+		 clicked = 1;
+		 /*execute a function when the slider is moved:*/
+		 window.addEventListener("mousemove", slideMove);
+		 window.addEventListener("touchmove", slideMove);
+		}
+		function slideFinish() {
+		 /*the slider is no longer clicked:*/
+		 clicked = 0;
+		}
+		function slideMove(e) {
+		 var pos;
+		 /*if the slider is no longer clicked, exit this function:*/
+		 if (clicked == 0) return false;
+		 /*get the cursor's x position:*/
+		 pos = getCursorPos(e)
+		 /*prevent the slider from being positioned outside the image:*/
+		 if (pos < 0) pos = 0;
+		 if (pos > w) pos = w;
+		 /*execute a function that will resize the overlay image according to the cursor:*/
+		 slide(pos);
+		}
+		function getCursorPos(e) {
+		 var a, x = 0;
+		 e = e || window.event;
+		 /*get the x positions of the image:*/
+		 a = img.getBoundingClientRect();
+		 /*calculate the cursor's x coordinate, relative to the image:*/
+		 x = e.pageX - a.left;
+		 /*consider any page scrolling:*/
+		 x = x - window.pageXOffset;
+		 return x;
+		}
+		function slide(x) {
+		 /*resize the image:*/
+		 img.style.width = x + "px";
+		 /*position the slider:*/
+		 slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+		}
+	 }
+	}
+	</script>
+	
+
+
+
+
+
+
+
+
+
 </head>
 <body>
 	
 	<p style="font-size:14px" align="center">Ez a hírlevél <a href="https://videosec.com/hirlevel/hirlevel2021-14.php">weboldalként itt elérhető.</a></p>
-
-
-
-
-
-
-
-
-
-
-
-
 
 <section id="header">
 	<table width="800" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -265,23 +376,53 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 
 
 
-<section id="video-linking" >
-	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
+
+
+
+
+
+
+
+
+
+<section id="funkciok">
+	
+	<h1 class="text-black-large" align="center" style="font-family: Georgia;color: rgb(59, 64, 69);font-size: 60px;font-weight: 700;">Smart IQ kamerák</h1>
+	<p>&nbsp;</p>
+	
+	<table class="table-inner" align="center" style="margin-top: 0px;width: 800px;border: 0;text-align: center;">
 		<tbody>
-			<tr >
-				<td style="width: 300px;" colspan="2">
-					<h1>Smart IQ kamerák</h1>
-					<h2 style="padding-bottom: 15px;">Prémium Videómegfigyelés</h2>
-					<p class="text-small-black">Bemutatjuk új VideoSec Smart IQ kameráinkat</p>
-				</td>
-				<td style="width: 500px;" rowspan="2">
-					<a href="#"><img src="./Videosec hírlevél_files/yt.jpg" alt="Nature" style="width:100%;"></a>
-				</td>
+			<tr>
+				<th class="leiras-kis-cella" style="width: 20%;height: 50px;text-align: center;margin: 0px;"><img src="./Videosec hírlevél_files/h265-logo.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></th>
+				
+				
+				
+				<th width="40%" rowspan="6"><img width="100%" alt="sima kapcsolos" src="./Videosec hírlevél_files/Domecam.jpg"></th>
+
+
+
+
+				<th class="leiras-kis-cella" style="width: 20%;height: 50px;text-align: center;margin: 0px;"><img src="./Videosec hírlevél_files/ip67-logo.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></th>
 			</tr>
-			<tr >
-				<td align="center">
-					<a href="#felhasznalhatosag"><button style="width: 200px;" class="button-blue" >Videó</button></a>
-				</td>
+			<tr>
+				<td class="leiras-kis-cella" style="width: 20%;height: 50px;text-align: center;margin: 0px;"><h4 style="font-size: 25px;font-weight: 700;font-family: Georgia;color: rgb(59, 64, 69);margin-top: 0px;margin-bottom: 0px;">Alacsony BitRate</h4></td>
+				<td class="leiras-kis-cella" style="width: 20%;height: 50px;text-align: center;margin: 0px;"><h4 style="font-size: 25px;font-weight: 700;font-family: Georgia;color: rgb(59, 64, 69);margin-top: 0px;margin-bottom: 0px;">Víz és Por álló</h4></td>
+			</tr>
+			<tr>
+				<td class="leiras-kis-cella" style="width: 20%;height: 50px;text-align: center;margin: 0px;"><p class="leiras-szoveg" style="margin-top: 0px;font-family: Lucida Sans Unicode;font-size: 14px;font-weight: 100;color: rgb(59, 64, 69);">Video tömörítő algoritmus, amelyel alacsonyab a BitRate</p><p>&nbsp;</p></td>
+				<td class="leiras-kis-cella" style="width: 20%;height: 50px;text-align: center;margin: 0px;"><p class="leiras-szoveg" style="margin-top: 0px;font-family: Lucida Sans Unicode;font-size: 14px;font-weight: 100;color: rgb(59, 64, 69);">Minden Smart IQ kamera IP67-es szintig vízálló</p><p>&nbsp;</p></td>
+			</tr>
+			<tr>
+				<th class="leiras-kis-cella" style="width: 20%;height: 50px;text-align: center;margin: 0px;"><img src="./Videosec hírlevél_files/tempreture.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></th>
+				<th class="leiras-kis-cella" style="width: 20%;height: 50px;text-align: center;margin: 0px;"><img src="./Videosec hírlevél_files/starlight-logo.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></th>
+			</tr>
+			<tr>
+				<td class="leiras-kis-cella" style="width: 20%;height: 50px;text-align: center;margin: 0px;"><h4 style="font-size: 25px;font-weight: 700;font-family: Georgia;color: rgb(59, 64, 69);margin-top: 0px;margin-bottom: 0px;">-20°C és 60°C közötti operáció</h4></td>
+				<td class="leiras-kis-cella" style="width: 20%;height: 50px;text-align: center;margin: 0px;"><h4 style="font-size: 25px;font-weight: 700;font-family: Georgia;color: rgb(59, 64, 69);margin-top: 0px;margin-bottom: 0px;">Szines ejszakai felvetel</h4></td>
+			</tr>
+			<tr>
+				<td class="leiras-kis-cella" style="width: 20%;height: 50px;text-align: center;margin: 0px;"><p class="leiras-szoveg" style="margin-top: 0px;font-family: Lucida Sans Unicode;font-size: 14px;font-weight: 100;color: rgb(59, 64, 69);">A kamerák kültéri használatra alkalmasak -20°C és 60°C között</p></td>
+				<td class="leiras-kis-cella" style="width: 20%;height: 50px;text-align: center;margin: 0px;"><p class="leiras-szoveg" style="margin-top: 0px;font-family: Lucida Sans Unicode;font-size: 14px;font-weight: 100;color: rgb(59, 64, 69);">Színes éjszakai képeket is képesek felvenni amíg társai csak fekete fehéret</p></td>
 			</tr>
 		</tbody>
 	</table>
@@ -297,16 +438,43 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 
 
 
+<section id="video-linking" class="default-color">
+	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
+		<tbody>
+			<tr >
+				<td style="width: 300px;" >
+					<h1 class="text-h1-feher">Smart IQ Kamerák</h1>
+					<h2 style="padding-bottom: 15px;">Prémium Videómegfigyelés</h2>
+					<a href="#felhasznalhatosag"><button style="width: 200px;" class="button-white" >Videó</button></a>
+				</td>
+				<td style="width: 500px;" >
+					<a href="#"><img src="./Videosec hírlevél_files/yt.jpg" alt="Nature" style="width:100%;"></a>
+				</td>
+			</tr>
+			
+		</tbody>
+	</table>
+	
+
+<p>&nbsp;</p>
+</section>
+
+
+
+
+
+
+
+
 	<section id="Starlight">
-		<p>&nbsp;</p>
 		<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
 			<tbody>
 				<tr >
 					<td class="table-eloszlas-td" colspan="2" align="left">
-						<h1 >Superstarlight Szenzor</h1>
+						<h1 >Super Starlight Senzor</h1>
 						<p>&nbsp;</p>
 						<p class="text-small-black">Minden 5MP IQ kameránk Superstarlight, valamint Valós WDR (True Wide Dynamic Range) szenzorral van felszerelve</p>
-						<p>&nbsp;</p>
+						
 					</td>
 					<td class="table-eloszlas-td" >
 						
@@ -320,17 +488,29 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 	
 		<table width=800px" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tbody>
-			  <tr>
+			 <tr>
 					<td>
-						<img src="./Videosec hírlevél_files/starlight.jpg" alt="Nature" style="width:100%;">
+						<div class="img-comp-container">
+							<div class="img-comp-img">
+								<img src="./Videosec hírlevél_files/blackandwhite.jpg" width="800" height="540">
+							</div>
+							<div class="img-comp-img img-comp-overlay">
+							<img src="./Videosec hírlevél_files/color.jpg" width="800" height="540">
+							</div>
+						</div>
+						
+						<script>
+						/*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
+						initComparisons();
+						</script>
 					</td>
-			  </tr>
-			  <tr>
+			 </tr>
+			 <tr>
 					<td style="text-align: center;"> 
 						<h1 class="text-alcim-black">Színek alacsony fényviszonyoknál</h1>
 						<p class="text-small-black">A szenzor képes színes képeket produkálni alacsony fényviszonyok mellet, ahol hagyományos társai csak infravörös (fekete/fehér) képet tudnak biztosítani. Ezt Superstarlight technológiájának köszönheti.</p>
 					</td>
-			  </tr>
+			 </tr>
 			</tbody>
 		</table>
 	</section>
@@ -361,7 +541,7 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 
 
 
-	<section id="WDR" class="default-color">
+<section id="WDR" class="default-color">
 		<table width="800px" border="0"align="center">
 			<tbody>
 				<tr >
@@ -383,12 +563,12 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 	
 		<table width="800px" border="0" cellspacing="0" cellpadding="5" align="center">
 			<tbody>
-			  <tr>
+			 <tr>
 				<td><img width="260" src="./Videosec hírlevél_files/sotet_kep.jpg" alt="sotet_kep"></td>
 				<td><img width="260" src="./Videosec hírlevél_files/WDR_kep.jpg" alt="WDR_kep"></td>
 				<td><img width="260" src="./Videosec hírlevél_files/vilagos_kep.jpg" alt="vilagos_kep"></td>
-			  </tr>
-			  <tr>
+			 </tr>
+			 <tr>
 				<td><p class="text-small-white" style="text-align: center;">Az eggyik szenzor Hosszu zaridovel csak a sötét részeket látja részletesen</p></td>
 				<td><p class="text-small-white" style="text-align: center;">WDR esetében a képeket kombinálva egymás hiányait pótolják ki</p></td>
 				<td><p class="text-small-white" style="text-align: center;">a másik szenzor rövid zaridovel csak a világos részeket látja részletesen</p></td>
@@ -396,16 +576,10 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 			</tbody>
 		</table>
 	
-	</section>
-
-
-	
-
+</section>
 
 	<p>&nbsp;</p>
 	<p>&nbsp;</p>
-
-
 
 <section id="H.256-Smart">
 	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
@@ -428,12 +602,7 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 	</table>
 </section>
 
-
-
-
-
 <p>&nbsp;</p>
-
 
 <section id="plane">
 	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
@@ -456,9 +625,6 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 </section>
 
 
-
-
-
 <section id="graph">
 	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
 		<tbody>
@@ -479,13 +645,11 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 	</table>
 </section>
 
-
-
-
+<p>&nbsp;</p> 
 
 <section id="felhasznalhatosag" class="default-color">
 
-	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
+	<table width="800px" border="0" cellspacing="0" cellpadding="15" align="center">
 		<tbody>
 		<tr>
 			<th colspan="5" align="center">
@@ -493,27 +657,24 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 			</th>
 		</tr>
 		<tr>
-			<td><img class="icon" src="./Videosec hírlevél_files/shield.jpg" alt=""></td>
-			<td><img class="icon" src="./Videosec hírlevél_files/shop.jpg" alt=""></td>
-			<td><img class="icon" src="./Videosec hírlevél_files/food.jpg" alt=""></td>
-			<td><img class="icon" src="./Videosec hírlevél_files/home.jpg" alt=""></td>
-			<td><img class="icon" src="./Videosec hírlevél_files/industrial.jpg" alt=""></td>
-		  </tr>
-		  <tr>
-			<td><p class="text-small-white" style="text-align: center;">Biztonságra</p></td>
-			<td><p class="text-small-white" style="text-align: center;">Kisválalkozásra</p></td>
-			<td><p class="text-small-white" style="text-align: center;">Nagyválalkozásra</p></td>
-			<td><p class="text-small-white" style="text-align: center;">Otthonra</p></td>
-			<td><p class="text-small-white" style="text-align: center;">Iparhoz</p></td>
-		  </tr>
+			<td align="center"><img class="icon" src="./Videosec hírlevél_files/shield.jpg" alt=""></td>
+			<td align="center"><img class="icon" src="./Videosec hírlevél_files/shop.jpg" alt=""></td>
+			<td align="center"><img class="icon" src="./Videosec hírlevél_files/home.jpg" alt=""></td>
+			<td align="center"><img class="icon" src="./Videosec hírlevél_files/industrial.jpg" alt=""></td>
+		 </tr>
+		 <tr>
+			<td><p class="text-small-white" style="text-align: center; font-size: 16 !important;">Biztonságra</p></td>
+			<td><p class="text-small-white" style="text-align: center; font-size: 16 !important;">Kisválalkozásra</p></td>
+			<td><p class="text-small-white" style="text-align: center; font-size: 16 !important;">Otthonra</p></td>
+			<td><p class="text-small-white" style="text-align: center; font-size: 16 !important;">Nagyválalkozásra</p></td>
+		 </tr>
 		</tbody>
 	</table>
 	<p>&nbsp;</p>
-
 </section>
 
-
 <p>&nbsp;</p>
+
 <section id="homerseklet">
 	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
 		<tbody>
@@ -534,9 +695,6 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 	</table>
 </section>
 
-
-
-<p>&nbsp;</p>
 <section id="ip67" >
 	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
 		<tbody>
@@ -549,7 +707,7 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 				</td>
 				<td class="table-eloszlas-td">
 					
-					<img src="./Videosec hírlevél_files/ip67-logo.jpg" alt="Nature" align="right">
+					<img src="./Videosec hírlevél_files/wetcam.jpg" alt="Nature" align="right">
 				
 				</td>
 				
@@ -557,9 +715,6 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 		</tbody>
 	</table>
 </section>
-
-
-
 
 
 
@@ -633,7 +788,7 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 			<td colspan="3">
 				<p>&nbsp;</p>
 				<p align="center"><b>Euro Tech Corporation Kft.</b><br>
-				6724-H Szeged,  Üstökös u. 12/b<br>
+				6724-H Szeged, Üstökös u. 12/b<br>
 				Tel/Fax: +36 62 458 585<br>
 				Technikai háttér / Szervíz: +36 70 439 8802<br>
 				E-mail: <a href="mailto:eurotech@videosec.com" style="color:#461724; font-weight:bold;">eurotech@videosec.com</a><br>
