@@ -210,39 +210,100 @@ img{
 
 
 
-.img-comp-container {
- position: relative;
- height: 540px; /*should be the same height as the images*/
+
+.wrapper{
+  position: relative;
+  height: 445px;
+  width: 800px;
+  overflow: hidden;
+  background: #fff;
+  border: 7px solid #fff;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.15);
 }
-
-.img-comp-img {
- position: absolute;
- width: auto;
- height: auto;
- overflow:hidden;
+.wrapper .images{
+  height: 100%;
+  width: 100%;
+  display: flex;
 }
-
-.img-comp-img img {
- display:block;
+.wrapper .images .img-1{
+  height: 100%;
+  width: 100%;
+  background: url("./2021-15/blackandwhite.jpg") no-repeat;
 }
-
-.img-comp-slider {
- position: absolute;
- z-index:9;
- cursor: ew-resize;
- /*set the appearance of the slider:*/
- width: 40px;
- height: 40px;
- background-color: rgb(0, 148, 247);
- opacity: 0.7;
- border-radius: 50%;
+.wrapper .images .img-2{
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  background: url("./2021-15/color.jpg") no-repeat;
 }
-
-
-
-
-
-
+.wrapper .slider{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+.wrapper .slider input{
+  width: 100%;
+  outline: none;
+  background: none;
+  -webkit-appearance: none;
+}
+.slider input::-webkit-slider-thumb{
+  height: 465px;
+  width: 3px;
+  background: none;
+  -webkit-appearance: none;
+  cursor: col-resize;
+}
+.slider .drag-line{
+  width: 3px;
+  height: 465px;
+  position: absolute;
+  left: 49.85%;
+  pointer-events: none;
+}
+.slider .drag-line::before,
+.slider .drag-line::after{
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 222px;
+  background: rgb(0, 148, 247);
+}
+.slider .drag-line::before{
+  top: 0;
+}
+.slider .drag-line::after{
+  bottom: 0;
+}
+.slider .drag-line span{
+  height: 42px;
+  width: 42px;
+  border: 3px solid rgb(0, 148, 247);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.slider .drag-line span::before,
+.slider .drag-line span::after{
+  position: absolute;
+  content: "";
+  top: 50%;
+  border: 10px solid transparent;
+  border-bottom-width: 0px;
+  border-right-width: 0px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.slider .drag-line span::before{
+  left: 40%;
+  border-left-color: #fff;
+}
+.slider .drag-line span::after{
+  left: 60%;
+  border-top-color: #fff;
+}
 
 
 
@@ -253,90 +314,12 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 </style>
 
 
-<script>
-	function initComparisons() {
-	 var x, i;
-	 /*find all elements with an "overlay" class:*/
-	 x = document.getElementsByClassName("img-comp-overlay");
-	 for (i = 0; i < x.length; i++) {
-		/*once for each "overlay" element:
-		pass the "overlay" element as a parameter when executing the compareImages function:*/
-		compareImages(x[i]);
-	 }
-	 function compareImages(img) {
-		var slider, img, clicked = 0, w, h;
-		/*get the width and height of the img element*/
-		w = img.offsetWidth;
-		h = img.offsetHeight;
-		/*set the width of the img element to 50%:*/
-		img.style.width = (w / 2) + "px";
-		/*create slider:*/
-		slider = document.createElement("DIV");
-		slider.setAttribute("class", "img-comp-slider");
-		/*insert slider*/
-		img.parentElement.insertBefore(slider, img);
-		/*position the slider in the middle:*/
-		slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
-		slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
-		/*execute a function when the mouse button is pressed:*/
-		slider.addEventListener("mousedown", slideReady);
-		/*and another function when the mouse button is released:*/
-		window.addEventListener("mouseup", slideFinish);
-		/*or touched (for touch screens:*/
-		slider.addEventListener("touchstart", slideReady);
-		/*and released (for touch screens:*/
-		window.addEventListener("touchend", slideFinish);
-		function slideReady(e) {
-		 /*prevent any other actions that may occur when moving over the image:*/
-		 e.preventDefault();
-		 /*the slider is now clicked and ready to move:*/
-		 clicked = 1;
-		 /*execute a function when the slider is moved:*/
-		 window.addEventListener("mousemove", slideMove);
-		 window.addEventListener("touchmove", slideMove);
-		}
-		function slideFinish() {
-		 /*the slider is no longer clicked:*/
-		 clicked = 0;
-		}
-		function slideMove(e) {
-		 var pos;
-		 /*if the slider is no longer clicked, exit this function:*/
-		 if (clicked == 0) return false;
-		 /*get the cursor's x position:*/
-		 pos = getCursorPos(e)
-		 /*prevent the slider from being positioned outside the image:*/
-		 if (pos < 0) pos = 0;
-		 if (pos > w) pos = w;
-		 /*execute a function that will resize the overlay image according to the cursor:*/
-		 slide(pos);
-		}
-		function getCursorPos(e) {
-		 var a, x = 0;
-		 e = e || window.event;
-		 /*get the x positions of the image:*/
-		 a = img.getBoundingClientRect();
-		 /*calculate the cursor's x coordinate, relative to the image:*/
-		 x = e.pageX - a.left;
-		 /*consider any page scrolling:*/
-		 x = x - window.pageXOffset;
-		 return x;
-		}
-		function slide(x) {
-		 /*resize the image:*/
-		 img.style.width = x + "px";
-		 /*position the slider:*/
-		 slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
-		}
-	 }
-	}
-	</script>
 	
 
 </head>
 <body>
 	
-	<p style="font-size:14px" align="center">Ez a hírlevél <a href="https://videosec.com/hirlevel/hirlevel2021-14.php">weboldalként itt elérhető.</a></p>
+	<p style="font-size:14px" align="center">Ez a hírlevél <a href="https://videosec.com/hirlevel/hirlevel2021-15.php">weboldalként itt elérhető.</a></p>
 
 	<section id="header">
 		<table width="800" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -345,15 +328,15 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 	
 					<td align="left" width="50%" valign="middle">
 						<div style="vertical-align: center;">
-							<a href="https://videosec.com/?lp=NLhead" target="_blank"><img width="300px" alt="Videosec" src="./Videosec hírlevél_files/Videosec_logo.png"></a>
+							<a href="https://videosec.com/?lp=NLhead" target="_blank"><img width="300px" alt="Videosec" src="./2021-15/Videosec_logo.png"></a>
 						</div>
 					</td>
 					<td align="right" width="50%" height="50px">
-						<a href="https://www.facebook.com/Videosec1998/" target="_blank"><img src="./Videosec hírlevél_files/facebook.jpg" alt="facebook"></a>
+						<a href="https://www.facebook.com/Videosec1998/" target="_blank"><img src="./2021-15/facebook.jpg" alt="facebook"></a>
 						&nbsp;
-						<a href="https://www.linkedin.com/company/videosec" target="_blank"><img src="./Videosec hírlevél_files/linkedin.jpg" alt="linkedin"></a>
+						<a href="https://www.linkedin.com/company/videosec" target="_blank"><img src="./2021-15/linkedin.jpg" alt="linkedin"></a>
 						&nbsp;
-						<a href="https://www.youtube.com/channel/UC3wmm71X_VlZtk6DzVng0Pw" target="_blank"><img src="./Videosec hírlevél_files/youtube.jpg" alt="youtube channel"></a>
+						<a href="https://www.youtube.com/channel/UC3wmm71X_VlZtk6DzVng0Pw" target="_blank"><img src="./2021-15/youtube.jpg" alt="youtube channel"></a>
 				
 					</td>
 				</tr>
@@ -387,16 +370,16 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 		<table class="table-inner" align="center" style="margin-top: 0px;width: 800px;border: 0;text-align: center;">
 			<tbody>
 				<tr>
-					<th class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><a href="#elijesztes"><img src="./Videosec hírlevél_files/elijesztes.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></a></th>
+					<th class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><a href="#elijesztes"><img src="./2021-15/elijesztes.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></a></th>
 					
 					
 					
-					<th width="40%" rowspan="6"><img width="100%" alt="sima kapcsolos" src="./Videosec hírlevél_files/Domecam.jpg"></th>
+					<th width="40%" rowspan="6"><img width="100%" alt="sima kapcsolos" src="./2021-15/Domecam.jpg"></th>
 	
 	
 	
 	
-					<th class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><a href="#katalogus"> <img src="./Videosec hírlevél_files/mpx.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></a></th>
+					<th class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><a href="#katalogus"> <img src="./2021-15/mpx.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></a></th>
 				</tr>
 				<tr>
 					<td class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><h4 style="font-size: 25px;font-weight: 700;font-family: Georgia;color: rgb(59, 64, 69);margin-top: 0px;margin-bottom: 0px;">Riasztáselhárítás beszédhanggal</h4></td>
@@ -407,8 +390,8 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 					<td class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><p class="leiras-szoveg" style="margin-top: 0px;font-family: Lucida Sans Unicode;font-size: 14px;font-weight: 100;color: rgb(59, 64, 69);">Választhatóak 5 és 8 MP felbontású kamerák is, képkivágás nélküli teljes 16:9 képaránnyal.</p><p>&nbsp;</p></td>
 				</tr>
 				<tr>
-					<th class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><a href="#Starlight"><img src="./Videosec hírlevél_files/20ora.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></a></th>
-					<th class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><a href="#inteligens"><img src="./Videosec hírlevél_files/erzekeles-felismeres.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></a></th>
+					<th class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><a href="#Starlight"><img src="./2021-15/20ora.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></a></th>
+					<th class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><a href="#inteligens"><img src="./2021-15/erzekeles-felismeres.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></a></th>
 				</tr>
 				<tr>
 					<td class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><h4 style="font-size: 25px;font-weight: 700;font-family: Georgia;color: rgb(59, 64, 69);margin-top: 0px;margin-bottom: 0px;">Színes felvételek a nap 24 órájában</h4></td>
@@ -442,7 +425,7 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><button style="width: 200px;" class="button-white" >Videó</button></a>
 				</td>
 				<td style="width: 500px;" >
-					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><img src="./Videosec hírlevél_files/yt.jpg" alt="Nature" style="width:100%;"></a>
+					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><img src="./2021-15/yt.jpg" alt="Nature" style="width:100%;"></a>
 				</td>
 			</tr>
 			
@@ -466,14 +449,14 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 			<tbody>
 				<tr >
 					<td class="table-eloszlas-td" colspan="2" align="left">
-						<h1 >Starlight Szenzor</h1>
+						<h1 >Starlight szenzor</h1>
 						<p>&nbsp;</p>
 						<p class="text-small-black">Minden 5MP IQ kameránk Starlight, valamint Valós WDR (True Wide Dynamic Range) szenzorral van felszerelve</p>
 						
 					</td>
 					<td class="table-eloszlas-td" >
 						
-						<img width="400px" src="./Videosec hírlevél_files/sensor.jpg" alt="trackedplane">
+						<img width="400px" src="./2021-15/sensor.jpg" alt="trackedplane">
 					
 					</td>
 				</tr>
@@ -485,19 +468,32 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 			<tbody>
                 <tr>
 					<td>
-						<div class="img-comp-container">
-							<div class="img-comp-img">
-								<img src="./Videosec hírlevél_files/blackandwhite.jpg" width="800" height="540">
+						<div class="comparer">
+							<div class="wrapper">
+								<div class="images">
+								  <div class="img-1"></div>
+								  <div class="img-2"></div>
+								</div>
+								<div class="slider">
+								  <div class="drag-line">
+									<span></span>
+								  </div>
+								  <input type="range" min="0" max="100" value="50">
+								</div>
+							  </div>
+						  
+							  <script>
+								const slider = document.querySelector(".slider input");
+								const img = document.querySelector(".images .img-2");
+								const dragLine = document.querySelector(".slider .drag-line");
+								slider.oninput = ()=>{
+								  let sliderVal = slider.value;
+								  dragLine.style.left = sliderVal + "%";
+								  img.style.width = sliderVal + "%";
+								}
+							  </script>
+						  
 							</div>
-							<div class="img-comp-img img-comp-overlay">
-							<img src="./Videosec hírlevél_files/color.jpg" width="800" height="540">
-							</div>
-						</div>
-						
-						<script>
-						/*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
-						initComparisons();
-						</script>
 					</td>
 			 </tr>
 			 <tr>
@@ -526,10 +522,10 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 				<td style="width: 300px;" >
 					<h1 class="text-h1-feher">Smart IQ Kamerák</h1>
 					<h2 style="padding-bottom: 15px;">5MP LED-es Csőkamera mintavideó</h2>
-					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><button style="width: 200px;" class="button-white" >Videó</button></a>
+					<a href="https://www.youtube.com/watch?v=BdQ2J19D2ok"><button style="width: 200px;" class="button-white" >Videó</button></a>
 				</td>
 				<td style="width: 500px;" >
-					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><img src="./Videosec hírlevél_files/yt.jpg" alt="Nature" style="width:100%;"></a>
+					<a href="https://www.youtube.com/watch?v=BdQ2J19D2ok"><img src="./2021-15/5mp-logo.jpg" alt="Nature" style="width:100%;"></a>
 				</td>
 			</tr>
 			
@@ -548,14 +544,14 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 				<td class="table-eloszlas-td" colspan="2" align="left">
 					<h1>True-WDR</h1>
 					<p>&nbsp;</p>
-					<p class="text-small-black">A digitális felvételeknél alapvetően vagy a kép világos, vagy a sötét részleteihez alkalmazkodva vezéreljük az expozíciót. Valós WDR (Wide Dynamic Range) esetében a kamera képsoronként eltérő expozícióval készíti el a képkockákat, amiket fejlett algoritmusokkal tesz nagy dinamikai átfogású felvétellé.
+					<p class="text-small-black">A hagyományos digitális felvételeknél alapvetően vagy a kép világos, vagy a sötét részleteihez alkalmazkodva vezéreljük az expozíciót. Valós WDR (Wide Dynamic Range) esetében a kamera képsoronként eltérő expozícióval készíti el a képkockákat, amiket fejlett algoritmusokkal tesz nagy dinamikai átfogású felvétellé.
 					</p>
 
 					
 				</td>
 				<td class="table-eloszlas-td" style="vertical-align: bottom;">
 					
-					<img src="./Videosec hírlevél_files/combo.jpg" alt="Nature" style="width:100%;">
+					<img src="./2021-15/combo.jpg" alt="Nature" style="width:100%;">
 				
 				</td>
 				
@@ -566,9 +562,9 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 	<table width="800px" border="0" cellspacing="0" cellpadding="5" align="center">
 		<tbody>
 		 <tr>
-			<td><img width="260" src="./Videosec hírlevél_files/sotet_kep.jpg" alt="sotet_kep"></td>
-			<td><img width="260" src="./Videosec hírlevél_files/WDR_kep.jpg" alt="WDR_kep"></td>
-			<td><img width="260" src="./Videosec hírlevél_files/vilagos_kep.jpg" alt="vilagos_kep"></td>
+			<td><img width="260" src="./2021-15/sotet_kep.jpg" alt="sotet_kep"></td>
+			<td><img width="260" src="./2021-15/WDR_kep.jpg" alt="WDR_kep"></td>
+			<td><img width="260" src="./2021-15/vilagos_kep.jpg" alt="vilagos_kep"></td>
 		 </tr>
 		 <tr>
 			<td><p class="text-small-black" style="text-align: center;">Rövid expozícióval csak a világos részeket látja részletesen</p></td>
@@ -582,26 +578,6 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 
 
 
-<section id="4k video-linking" class="default-color">
-	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
-		<tbody>
-			<tr >
-				<td style="width: 300px;" >
-					<h1 class="text-h1-feher">Smart IQ Kamerák</h1>
-					<h2 style="padding-bottom: 15px;">4K Csőkamera mintavideó</h2>
-					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><button style="width: 200px;" class="button-white" >Videó</button></a>
-				</td>
-				<td style="width: 500px;" >
-					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><img src="./Videosec hírlevél_files/yt.jpg" alt="Nature" style="width:100%;"></a>
-				</td>
-			</tr>
-			
-		</tbody>
-	</table>
-	
-
-<p>&nbsp;</p>
-</section>
 
 
 
@@ -625,7 +601,7 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 		<tbody>
 		 <tr>
 				<td>
-					<img width="800px" src="./Videosec hírlevél_files/smart.jpg" alt="trackedplane">
+					<img width="800px" src="./2021-15/smart.jpg" alt="trackedplane">
 				</td>
 		 </tr>
 		 <tr>
@@ -659,7 +635,7 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 		<tbody>
 		 <tr>
 				<td>
-					<img width="800px" src="./Videosec hírlevél_files/behatolas.jpg" alt="trackedplane">
+					<img width="800px" src="./2021-15/behatolas.jpg" alt="trackedplane">
 				</td>
 		 </tr>
 		 <tr>
@@ -693,7 +669,7 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 			<tr >
 				<td class="table-eloszlas-td">
 					
-					<img src="./Videosec hírlevél_files/h265-logo.jpg" alt="Nature">
+					<img src="./2021-15/h265-logo.jpg" alt="Nature">
 				
 				</td>
 				<td class="table-eloszlas-td" colspan="2" align="right">
@@ -723,7 +699,7 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 				</td>
 				<td class="table-eloszlas-td" >
 					
-					<img width="400px" src="./Videosec hírlevél_files/mozgas2.jpg" alt="trackedplane">
+					<img width="400px" src="./2021-15/mozgas2.jpg" alt="trackedplane">
 				
 				</td>
 			</tr>
@@ -738,7 +714,7 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 			<tr >
 				<td class="table-eloszlas-td">
 					
-					<img width="400px" src="./Videosec hírlevél_files/tarigeny.jpg" alt="chart">
+					<img width="400px" src="./2021-15/tarigeny.jpg" alt="chart">
 				
 				</td>
 				<td class="table-eloszlas-td" colspan="2" align="right">
@@ -765,10 +741,10 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 			</th>
 		</tr>
 		<tr>
-			<td align="center"><img class="icon" src="./Videosec hírlevél_files/street.jpg" alt=""></td>
-			<td align="center"><img class="icon" src="./Videosec hírlevél_files/shop.jpg" alt=""></td>
-			<td align="center"><img class="icon" src="./Videosec hírlevél_files/home.jpg" alt=""></td>
-			<td align="center"><img class="icon" src="./Videosec hírlevél_files/industrial.jpg" alt=""></td>
+			<td align="center"><img class="icon" src="./2021-15/street.jpg" alt=""></td>
+			<td align="center"><img class="icon" src="./2021-15/shop.jpg" alt=""></td>
+			<td align="center"><img class="icon" src="./2021-15/home.jpg" alt=""></td>
+			<td align="center"><img class="icon" src="./2021-15/industrial.jpg" alt=""></td>
 		 </tr>
 		 <tr>
 			<td><p class="text-small-white" style="text-align: center; font-size: 16!important;">Közterületfigyelésre</p></td>
@@ -789,7 +765,7 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 			<tr >
 				<td class="table-eloszlas-td">
 					
-					<img src="./Videosec hírlevél_files/hotcold.jpg" alt="Nature" style="width:100%;">
+					<img src="./2021-15/hotcold.jpg" alt="Nature" style="width:100%;">
 				
 				</td>
 				<td class="table-eloszlas-td"  align="center">
@@ -814,7 +790,7 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 				</td>
 				<td class="table-eloszlas-td">
 					
-					<img src="./Videosec hírlevél_files/wetcam.jpg" alt="Nature" align="right">
+					<img src="./2021-15/wetcam.jpg" alt="Nature" align="right">
 				
 				</td>
 				
@@ -843,13 +819,13 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 			
 			<tr>
 				<th colspan="2" align="center" width="266px">
-					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=IPW-2125IQ-40SA"><img class="icon" src="./Videosec hírlevél_files/cam1.jpg" alt="">
+					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=IPW-2125IQ-40SA"><img class="icon" src="./2021-15/cam1.jpg" alt="">
 					</a></th>
 				<th colspan="2" align="center" width="266px">
-					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=IPW-2225IQ-40SWX"><img class="icon" src="./Videosec hírlevél_files/cam2.jpg" alt="">
+					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=IPW-2225IQ-40SWX"><img class="icon" src="./2021-15/cam2.jpg" alt="">
 				</a></th>
 				<th colspan="2" align="center" width="266px">
-					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=IPW-2128IQ-28WAL"><img class="icon" src="./Videosec hírlevél_files/cam3.jpg" alt="">
+					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=IPW-2128IQ-28WAL"><img class="icon" src="./2021-15/cam3.jpg" alt="">
 				</a></th>
 			</tr>
 			<tr>
@@ -867,10 +843,10 @@ html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a 
 			</tr>
 			<tr>
 				<td colspan="3" align="center" width="400px">
-					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=IPW-2325IQ-28SZ"><img class="icon" src="./Videosec hírlevél_files/cam4.jpg" alt="">
+					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=IPW-2325IQ-28SZ"><img class="icon" src="./2021-15/cam4.jpg" alt="">
 				</a></td>
 				<td colspan="3" align="center" width="400px">
-					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=PTZ-675IQ-X4SWAL"><img class="icon" src="./Videosec hírlevél_files/cam5.jpg" alt="">
+					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=PTZ-675IQ-X4SWAL"><img class="icon" src="./2021-15/cam5.jpg" alt="">
 				</a></td>
 			</tr>
 			<tr>

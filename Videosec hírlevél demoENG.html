@@ -1,0 +1,970 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0049)https://videosec.com/hirlevel/hirlevel2021-14.php -->
+<html xmlns="https://www.w3.org/1999/xhtml" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+<title>Smart IQ Kamera</title>
+<style type="text/css">
+
+
+.ExternalClass {width: 100%;}  
+
+.default-color{
+	background-color: rgb(0, 148, 247);
+	color: white!important;
+}
+
+h1{
+	margin-bottom: 0px;
+	font-family: Georgia;
+	color: rgb(59, 64, 69);
+	font-size: 45px;
+	font-weight: 700;
+}
+h2{
+	margin-bottom: 0px;
+	font-family: Georgia;
+	color: white;
+	font-size: 25px;
+	font-weight: 700;
+}
+
+.table-eloszlas-td{
+	width: 50%;
+}
+
+img{
+	border-radius: 5%;
+}
+
+.icon{
+	background-color: white;
+	border-radius: 50%;
+
+}
+
+
+
+
+
+
+
+
+
+.container {
+ position: relative;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.text-alcim-black{
+	margin-bottom: 0px;
+	font-family: Georgia;
+	color: rgb(59, 64, 69);
+	font-size: 40px;
+	font-weight: 700;
+}
+
+.text-alcim-white{
+	margin-bottom: 0px;
+	font-family: Georgia;
+	color: white;
+	font-size: 40px;
+	font-weight: 700;
+}
+
+.text-small-black{
+	font-family: Lucida Sans Unicode;
+	font-size: 20px;
+	font-weight: 100;
+	margin-block-end: 24px;
+	line-height: 25px;
+	margin-block-start: 0px;
+	margin-bottom: 24px;
+	margin-top: 0px;
+	color: #3b4045;
+}
+
+.text-block-left {
+ position: absolute;
+ bottom:10%;
+ left: 20px;
+ background-color: rgba(51, 51, 51, 0.253);
+ color: white;
+ padding-left: 20px;
+ padding-right: 20px;
+ width: 30%;
+}
+
+.text-block-right {
+ position: absolute;
+ bottom:10%;
+ right: 20px;
+ background-color: rgba(51, 51, 51, 0.253);
+ color: white;
+ padding-left: 20px;
+ padding-right: 20px;
+ width: 30%;
+}
+
+.text-h1-feher{
+	margin-bottom: 0px;
+	font-family: Georgia;
+	color: white;
+	font-size: 45px;
+	font-weight: 700;
+	padding-bottom: 20px;
+}
+
+.text-small-white{
+	font-family: Lucida Sans Unicode;
+	font-size: 20px;
+	font-weight: 100;
+	margin-block-end: 24px;
+	line-height: 25px;
+	margin-block-start: 0px;
+	margin-bottom: 24px;
+	margin-top: 0px;
+	color: white;
+
+}
+
+.text-cimszoveg{
+	margin-bottom: 0px;
+	font-family: Georgia;
+	color: white;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+.button-blue{
+	background-color: rgb(0, 148, 247);
+ border: none;
+ color: white;
+ padding: 16px 32px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ font-size: 16px;
+ margin: 4px 2px;
+ transition-duration: 0.4s;
+ cursor: pointer;
+	border-radius: 30px;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgb(0, 148, 247);
+}
+
+.button-blue:hover {
+	background-color: rgb(0, 77, 128);
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgb(0, 77, 128);
+	color: white;
+}
+
+.button-white{
+	background-color: white;
+ border: none;
+ color: rgb(0, 148, 247);
+ padding: 16px 32px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ font-size: 16px;
+ margin: 4px 2px;
+ transition-duration: 0.4s;
+ cursor: pointer;
+	border-radius: 30px;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgb(0, 148, 247);
+}
+
+.button-white:hover {
+	background-color: rgb(0, 77, 128);
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgb(0, 77, 128);
+	color: white;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.img-comp-container {
+ position: relative;
+ height: 540px; /*should be the same height as the images*/
+}
+
+.img-comp-img {
+ position: absolute;
+ width: auto;
+ height: auto;
+ overflow:hidden;
+}
+
+.img-comp-img img {
+ display:block;
+}
+
+.img-comp-slider {
+ position: absolute;
+ z-index:9;
+ cursor: ew-resize;
+ /*set the appearance of the slider:*/
+ width: 60px;
+ height: 60px;
+ background-color: rgb(0, 148, 247);
+ opacity: 0.7;
+ border-radius: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+html, body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; /*mobilon a text sizeot javítja protrait*/}
+</style>
+
+
+<script>
+	function initComparisons() {
+	 var x, i;
+	 /*find all elements with an "overlay" class:*/
+	 x = document.getElementsByClassName("img-comp-overlay");
+	 for (i = 0; i < x.length; i++) {
+		/*once for each "overlay" element:
+		pass the "overlay" element as a parameter when executing the compareImages function:*/
+		compareImages(x[i]);
+	 }
+	 function compareImages(img) {
+		var slider, img, clicked = 0, w, h;
+		/*get the width and height of the img element*/
+		w = img.offsetWidth;
+		h = img.offsetHeight;
+		/*set the width of the img element to 50%:*/
+		img.style.width = (w / 2) + "px";
+		/*create slider:*/
+		slider = document.createElement("DIV");
+		slider.setAttribute("class", "img-comp-slider");
+		/*insert slider*/
+		img.parentElement.insertBefore(slider, img);
+		/*position the slider in the middle:*/
+		slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+		slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+		/*execute a function when the mouse button is pressed:*/
+		slider.addEventListener("mousedown", slideReady);
+		/*and another function when the mouse button is released:*/
+		window.addEventListener("mouseup", slideFinish);
+		/*or touched (for touch screens:*/
+		slider.addEventListener("touchstart", slideReady);
+		/*and released (for touch screens:*/
+		window.addEventListener("touchend", slideFinish);
+		function slideReady(e) {
+		 /*prevent any other actions that may occur when moving over the image:*/
+		 e.preventDefault();
+		 /*the slider is now clicked and ready to move:*/
+		 clicked = 1;
+		 /*execute a function when the slider is moved:*/
+		 window.addEventListener("mousemove", slideMove);
+		 window.addEventListener("touchmove", slideMove);
+		}
+		function slideFinish() {
+		 /*the slider is no longer clicked:*/
+		 clicked = 0;
+		}
+		function slideMove(e) {
+		 var pos;
+		 /*if the slider is no longer clicked, exit this function:*/
+		 if (clicked == 0) return false;
+		 /*get the cursor's x position:*/
+		 pos = getCursorPos(e)
+		 /*prevent the slider from being positioned outside the image:*/
+		 if (pos < 0) pos = 0;
+		 if (pos > w) pos = w;
+		 /*execute a function that will resize the overlay image according to the cursor:*/
+		 slide(pos);
+		}
+		function getCursorPos(e) {
+		 var a, x = 0;
+		 e = e || window.event;
+		 /*get the x positions of the image:*/
+		 a = img.getBoundingClientRect();
+		 /*calculate the cursor's x coordinate, relative to the image:*/
+		 x = e.pageX - a.left;
+		 /*consider any page scrolling:*/
+		 x = x - window.pageXOffset;
+		 return x;
+		}
+		function slide(x) {
+		 /*resize the image:*/
+		 img.style.width = x + "px";
+		 /*position the slider:*/
+		 slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+		}
+	 }
+	}
+	</script>
+	
+
+</head>
+<body>
+	
+	<p style="font-size:14px" align="center">Ez a hírlevél <a href="https://videosec.com/hirlevel/hirlevel2021-14.php">weboldalként itt elérhető.</a></p>
+
+	<section id="header">
+		<table width="800" border="0" cellspacing="0" cellpadding="0" align="center">
+			<tbody>
+				<tr>
+	
+					<td align="left" width="50%" valign="middle">
+						<div style="vertical-align: center;">
+							<a href="https://videosec.com/?lp=NLhead" target="_blank"><img width="300px" alt="Videosec" src="./2021-15/Videosec_logo.png"></a>
+						</div>
+					</td>
+					<td align="right" width="50%" height="50px">
+						<a href="https://www.facebook.com/Videosec1998/" target="_blank"><img src="./2021-15/facebook.jpg" alt="facebook"></a>
+						&nbsp;
+						<a href="https://www.linkedin.com/company/videosec" target="_blank"><img src="./2021-15/linkedin.jpg" alt="linkedin"></a>
+						&nbsp;
+						<a href="https://www.youtube.com/channel/UC3wmm71X_VlZtk6DzVng0Pw" target="_blank"><img src="./2021-15/youtube.jpg" alt="youtube channel"></a>
+				
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	
+		<hr style="border: 5px solid rgb(0, 148, 247); border-radius: 50%; width: 80%; text-align: center;">
+	
+	
+	</section>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<section id="funkciok">
+	
+		<h1 class="text-black-large" align="center" style="font-family: Georgia;color: rgb(59, 64, 69);font-size: 60px;font-weight: 700;">Smart IQ Cameras <br>in our inventory</h1>
+		<p>&nbsp;</p>
+		
+		<table class="table-inner" align="center" style="margin-top: 0px;width: 800px;border: 0;text-align: center;">
+			<tbody>
+				<tr>
+					<th class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><a href="#elijesztes"><img src="./2021-15/elijesztes.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></a></th>
+					
+					
+					
+					<th width="40%" rowspan="6"><img width="100%" alt="sima kapcsolos" src="./2021-15/Domecam.jpg"></th>
+	
+	
+	
+	
+					<th class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><a href="#katalogus"> <img src="./2021-15/mpx.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></a></th>
+				</tr>
+				<tr>
+					<td class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><h4 style="font-size: 25px;font-weight: 700;font-family: Georgia;color: rgb(59, 64, 69);margin-top: 0px;margin-bottom: 0px;">Voice Deterrent</h4></td>
+					<td class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><h4 style="font-size: 25px;font-weight: 700;font-family: Georgia;color: rgb(59, 64, 69);margin-top: 0px;margin-bottom: 0px;">5 and 8 Megapixels</h4></td>
+				</tr>
+				<tr>
+					<td class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><p class="leiras-szoveg" style="margin-top: 0px;font-family: Lucida Sans Unicode;font-size: 14px;font-weight: 100;color: rgb(59, 64, 69);">Pre Recorded voice messages that could be played in case of Alarms or intrusion.</p><p>&nbsp;</p></td>
+					<td class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><p class="leiras-szoveg" style="margin-top: 0px;font-family: Lucida Sans Unicode;font-size: 14px;font-weight: 100;color: rgb(59, 64, 69);">Available in 5 and 8 megapixels without cropping, in an aspect ratio of 16:9</p><p>&nbsp;</p></td>
+				</tr>
+				<tr>
+					<th class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><a href="#Starlight"><img src="./2021-15/20ora.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></a></th>
+					<th class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><a href="#inteligens"><img src="./2021-15/erzekeles-felismeres.jpg" alt="connector icon" style=" width: 90px; height: 90px;"></a></th>
+				</tr>
+				<tr>
+					<td class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><h4 style="font-size: 25px;font-weight: 700;font-family: Georgia;color: rgb(59, 64, 69);margin-top: 0px;margin-bottom: 0px;">Colored recording 24hrs of the day</h4></td>
+					<td class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><h4 style="font-size: 25px;font-weight: 700;font-family: Georgia;color: rgb(59, 64, 69);margin-top: 0px;margin-bottom: 0px;">Smart Intrusion detection</h4></td>
+				</tr>
+				<tr>
+					<td class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><p class="leiras-szoveg" style="margin-top: 0px;font-family: Lucida Sans Unicode;font-size: 14px;font-weight: 100;color: rgb(59, 64, 69);">Thanks to its Starlight technology the camera makes full color recordings even at night</p></td>
+					<td class="leiras-kis-cella" style="width: 20%;text-align: center;margin: 0px;"><p class="leiras-szoveg" style="margin-top: 0px;font-family: Lucida Sans Unicode;font-size: 14px;font-weight: 100;color: rgb(59, 64, 69);">Object based intrusion and line-crossing detection, with the ability to distinguish people and vehicle</p></td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	
+	
+	
+
+
+
+<p>&nbsp;</p>
+
+
+
+
+<section id="4k video-linking" class="default-color">
+	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
+		<tbody>
+			<tr >
+				<td style="width: 300px;" >
+					<h1 class="text-h1-feher">Smart IQ Cameras</h1>
+					<h2 style="padding-bottom: 15px;">4K Cameras example footage</h2>
+					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><button style="width: 200px;" class="button-white" >Video</button></a>
+				</td>
+				<td style="width: 500px;" >
+					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><img src="./2021-15/yt.jpg" alt="Nature" style="width:100%;"></a>
+				</td>
+			</tr>
+			
+		</tbody>
+	</table>
+	
+
+<p>&nbsp;</p>
+</section>
+
+
+
+
+
+
+
+
+
+	<section id="Starlight">
+		<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
+			<tbody>
+				<tr >
+					<td class="table-eloszlas-td" colspan="2" align="left">
+						<h1 >Starlight Sensor</h1>
+						<p>&nbsp;</p>
+						<p class="text-small-black">All 5Mp Cameras are equipped with Starlight and True Wide Dynamic Range techology</p>
+						
+					</td>
+					<td class="table-eloszlas-td" >
+						
+						<img width="400px" src="./2021-15/sensor.jpg" alt="trackedplane">
+					
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	
+	
+		<table width=800px" border="0" cellspacing="0" cellpadding="0" align="center">
+			<tbody>
+                <tr>
+					<td>
+						<div class="img-comp-container">
+							<div class="img-comp-img">
+								<img src="./2021-15/blackandwhite.jpg" width="800" height="540">
+							</div>
+							<div class="img-comp-img img-comp-overlay">
+							<img src="./2021-15/color.jpg" width="800" height="540">
+							</div>
+						</div>
+						
+						<script>
+						/*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
+						initComparisons();
+						</script>
+					</td>
+			 </tr>
+			 <tr>
+					<td style="text-align: center;"> 
+						<h1 class="text-alcim-black">Colors even in low lighting conditions</h1>
+						<p class="text-small-black">The Camera can produce colored images where traditional cameras can only record in black and white. This is thanks to its Starlight technology.</p>
+					</td>
+			 </tr>
+			</tbody>
+		</table>
+	</section>
+
+
+
+
+
+
+
+	<p>&nbsp;</p>
+	
+
+<section id="5mp video-linking" class="default-color">
+	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
+		<tbody>
+			<tr >
+				<td style="width: 300px;" >
+					<h1 class="text-h1-feher">Smart IQ Cameras</h1>
+					<h2 style="padding-bottom: 15px;">5MP LED equipped example footage</h2>
+					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><button style="width: 200px;" class="button-white" >Video</button></a>
+				</td>
+				<td style="width: 500px;" >
+					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><img src="./2021-15/yt.jpg" alt="Nature" style="width:100%;"></a>
+				</td>
+			</tr>
+			
+		</tbody>
+	</table>
+	
+
+<p>&nbsp;</p>
+</section>
+
+
+<section id="WDR">
+	<table width="800px" border="0"align="center">
+		<tbody>
+			<tr >
+				<td class="table-eloszlas-td" colspan="2" align="left">
+					<h1>True-WDR</h1>
+					<p>&nbsp;</p>
+					<p class="text-small-black">Traditional digital recordings either have details in the bright parts or set the exposition so they can have detailed darker spots. With True Wide Dynamic Range, the camera uses different exposure for each line of the image then combines them with an advanced algorithm, resulting in an image with a wide dynamic range. </p>
+
+					
+				</td>
+				<td class="table-eloszlas-td" style="vertical-align: bottom;">
+					
+					<img src="./2021-15/combo.jpg" alt="Nature" style="width:100%;">
+				
+				</td>
+				
+			</tr>
+		</tbody>
+	</table>
+
+	<table width="800px" border="0" cellspacing="0" cellpadding="5" align="center">
+		<tbody>
+		 <tr>
+			<td><img width="260" src="./2021-15/sotet_kep.jpg" alt="sotet_kep"></td>
+			<td><img width="260" src="./2021-15/WDR_kep.jpg" alt="WDR_kep"></td>
+			<td><img width="260" src="./2021-15/vilagos_kep.jpg" alt="vilagos_kep"></td>
+		 </tr>
+		 <tr>
+			<td><p class="text-small-black" style="text-align: center;">With short exposure we get an image with details in the light spots</p></td>
+			<td><p class="text-small-black" style="text-align: center;">In the case of WDR the combined images have details in dark and light parts of the image</p></td>
+			<td><p class="text-small-black" style="text-align: center;">With long exposure we get an image with details in the darker parts of the image</p></td>
+		</tr>
+		</tbody>
+	</table>
+
+</section>
+
+
+
+<section id="4k video-linking" class="default-color">
+	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
+		<tbody>
+			<tr >
+				<td style="width: 300px;" >
+					<h1 class="text-h1-feher">Smart IQ Cameras</h1>
+					<h2 style="padding-bottom: 15px;">example footage</h2>
+					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><button style="width: 200px;" class="button-white" >Video</button></a>
+				</td>
+				<td style="width: 500px;" >
+					<a href="https://www.youtube.com/watch?v=qeESdgBpcac"><img src="./2021-15/yt.jpg" alt="Nature" style="width:100%;"></a>
+				</td>
+			</tr>
+			
+		</tbody>
+	</table>
+	
+
+<p>&nbsp;</p>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<h1 class="text-black-large" align="center" style="font-family: Georgia;color: rgb(59, 64, 69);font-size: 60px;font-weight: 700;">Smart functions</h1>
+	<p>&nbsp;</p>
+
+
+<section id="inteligens">
+	<table width="800px" border="0" cellspacing="0" cellpadding="0" align="center">
+		<tbody>
+		 <tr>
+				<td>
+					<img width="800px" src="./2021-15/smart.jpg" alt="trackedplane">
+				</td>
+		 </tr>
+		 <tr>
+				<td style="text-align: center;"> 
+					<h1 class="text-alcim-black">Smart Intrusion detection</h1>
+					<p class="text-small-black">The camera can differentiate between vehicles pedestrians and motorcycles/bicycles. The user can customize a zone so it only alerts to a specified object (car/person/bike) and set the delay, so it does not do anything until the object is in the zone for a predetermined time.</p>
+				</td>
+		 </tr>
+		</tbody>
+	</table>
+</section>
+
+<p>&nbsp;</p>
+
+
+
+
+
+
+
+
+
+
+
+
+<p>&nbsp;</p>
+
+
+<section id="elijesztes">
+	<table width="800px" border="0" cellspacing="0" cellpadding="0" align="center">
+		<tbody>
+		 <tr>
+				<td>
+					<img width="800px" src="./2021-15/behatolasENG.jpg" alt="trackedplane">
+				</td>
+		 </tr>
+		 <tr>
+				<td style="text-align: center;"> 
+					<h1 class="text-alcim-black">Voice Deterrent</h1>
+					<p class="text-small-black">The Camera can playback prerecorded messages on its speakers. With these you can deliver warnings if someone is in a prohibited or hazardous area or for rules they need to follow (wear a mask/helmet). In the case of security a human voice is a better deterrent than a siren.</p>
+				</td>
+		 </tr>
+		</tbody>
+	</table>
+</section>
+
+
+
+
+
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+
+
+
+
+
+
+
+
+<section id="H.256-Smart" class="default-color">
+	<p>&nbsp;</p>
+	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
+		<tbody>
+			<tr >
+				<td class="table-eloszlas-td">
+					
+					<img src="./2021-15/h265-logo.jpg" alt="Nature">
+				
+				</td>
+				<td class="table-eloszlas-td" colspan="2" align="right">
+					<h1 class="text-h1-feher">H.256-Smart</h1>
+					<p>&nbsp;</p>
+					<p class="text-small-white">An advanced h.265 compression algorithm</p>
+					<a href="https://videosec.com/?cmdPage=SmartIPadv"><button class="button-white" >more information</button></a>
+				</td>
+				
+			</tr>
+		</tbody>
+	</table>
+	<p>&nbsp;</p>
+</section>
+
+<p>&nbsp;</p>
+
+<section id="plane">
+	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
+		<tbody>
+			<tr >
+				<td class="table-eloszlas-td" colspan="2" align="left">
+					<h1 >Only the movement is recorded</h1>
+					<p>&nbsp;</p>
+					<p class="text-small-black">It dynamically sets the compression rate of the image area based on movement.</p>
+				
+				</td>
+				<td class="table-eloszlas-td" >
+					
+					<img width="400px" src="./2021-15/mozgas2.jpg" alt="trackedplane">
+				
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+
+<section id="graph">
+	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
+		<tbody>
+			<tr >
+				<td class="table-eloszlas-td">
+					
+					<img width="400px" src="./2021-15/tarigeny.jpg" alt="chart">
+				
+				</td>
+				<td class="table-eloszlas-td" colspan="2" align="right">
+					<h1>Reduced Size</h1>
+					<p>&nbsp;</p>
+					<p class="text-small-black">With this we can drastically reduce the Bitrate improving the connection and Storage needs of the device.</p>
+				</td>
+				
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+<p>&nbsp;</p> 
+
+<section id="felhasznalhatosag" class="default-color">
+
+	<table width="800px" border="0" cellspacing="0" cellpadding="15" align="center">
+		<tbody>
+		<tr>
+			<th colspan="4" align="center">
+				<h1 class="text-h1-feher">Video Solutions for</h1>
+				
+			</th>
+		</tr>
+		<tr>
+			<td align="center"><img class="icon" src="./2021-15/street.jpg" alt=""></td>
+			<td align="center"><img class="icon" src="./2021-15/shop.jpg" alt=""></td>
+			<td align="center"><img class="icon" src="./2021-15/home.jpg" alt=""></td>
+			<td align="center"><img class="icon" src="./2021-15/industrial.jpg" alt=""></td>
+		 </tr>
+		 <tr>
+			<td><p class="text-small-white" style="text-align: center; font-size: 16!important;"> Public space monitoring</p></td>
+			<td><p class="text-small-white" style="text-align: center; font-size: 16!important;">Business security</p></td>
+			<td><p class="text-small-white" style="text-align: center; font-size: 16!important;">Home <br> security</p></td>
+			<td><p class="text-small-white" style="text-align: center; font-size: 16!important;">Enterprise solutions</p></td>
+		 </tr>
+		</tbody>
+	</table>
+	<p>&nbsp;</p>
+</section>
+
+<p>&nbsp;</p>
+
+<section id="homerseklet">
+	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
+		<tbody>
+			<tr >
+				<td class="table-eloszlas-td">
+					
+					<img src="./2021-15/hotcold.jpg" alt="Nature" style="width:100%;">
+				
+				</td>
+				<td class="table-eloszlas-td"  align="center">
+					<h1>Operation between -20°C and 60°C</h1>
+					<p>&nbsp;</p>
+					<p class="text-small-black">All IQ cameras are designed to work between -20°C and 60°C. (more information on our website)</p>
+				</td>
+				
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+<section id="ip67" >
+	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center">
+		<tbody>
+			<tr >
+				<td class="table-eloszlas-td" align="left">
+					<h1>IP67</h1>
+					<p>&nbsp;</p>
+					<p class="text-small-black">IQ cameras are certified IP67 (PTZ cameras are IP66) so they are resistant to outside elements.</p>
+				</td>
+				<td class="table-eloszlas-td">
+					
+					<img src="./2021-15/wetcam.jpg" alt="Nature" align="right">
+				
+				</td>
+				
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+
+<section id="katalogus" class="default-color" >
+	<p>&nbsp;</p>
+
+	<table width="800px" border="0" cellspacing="0" cellpadding="10" align="center" >
+		<tbody>
+			<tr>
+				<th colspan="6" align="center">
+					<h1 class="text-h1-feher">Videosec IQ Smart IP Cameras</h1>
+				</th>
+			</tr>
+			
+			<tr>
+				<th colspan="2" align="center" width="266px">
+					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=IPW-2125IQ-40SA"><img class="icon" src="./2021-15/cam1.jpg" alt="">
+					</a></th>
+				<th colspan="2" align="center" width="266px">
+					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=IPW-2225IQ-40SWX"><img class="icon" src="./2021-15/cam2.jpg" alt="">
+				</a></th>
+				<th colspan="2" align="center" width="266px">
+					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=IPW-2128IQ-28WAL"><img class="icon" src="./2021-15/cam3.jpg" alt="">
+				</a></th>
+			</tr>
+			<tr>
+				<th colspan="2" align="center" width="266px">
+					<p class="text-small-white" style="width: 250px; text-align: center; vertical-align: center; font-size: 16!important;">5Mpx <br>Fixed Bullet Camera<br> 4 mm   <br> <br></p>
+				</th>
+				<th colspan="2" align="center" width="266px">
+				
+				    <p class="text-small-white" style="width: 250px; text-align: center; vertical-align: center; font-size: 16!important;">5Mpx <br>Fixed Bullet Camera<br> 4 mm <br> White LED   <br></p>	
+				
+				</th>
+				<th colspan="2" align="center" width="266px">
+					<p class="text-small-white" style="width: 250px; text-align: center; vertical-align: center; font-size: 16!important;">4K <br>Fixed Bullet Camera<br> 2.8 mm  <br> microphone   Speaker</p>
+				</th>
+			</tr>
+			<tr>
+				<td colspan="3" align="center" width="400px">
+					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=IPW-2325IQ-28SZ"><img class="icon" src="./2021-15/cam4.jpg" alt="">
+				</a></td>
+				<td colspan="3" align="center" width="400px">
+					<a href="https://videosec.com/?lp=nTb&cmdLang=HUN&productid=PTZ-675IQ-X4SWAL"><img class="icon" src="./2021-15/cam5.jpg" alt="">
+				</a></td>
+			</tr>
+			<tr>
+				<td colspan="3" align="center" width="400px">
+					<p class="text-small-white" style="width: 250px; text-align: center; vertical-align: center; font-size: 16!important;">5Mpx <br>Fixed Bullet Camera  <br>2.7-13.5 mm motor <br><br></p>
+				</td>
+				<td colspan="3" align="center" width="400px">
+					<p class="text-small-white" style="width: 250px; text-align: center; vertical-align: center; font-size: 16!important;">5Mpx <br>PTZ Camera <br> 4x zoom <br>50m IR/10m White LED</p>
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+<table align="center">
+	<tbody>
+
+	
+	<p>&nbsp;</p>
+	<hr style="border: 5px solid rgb(0, 148, 247); border-radius: 50%; width: 80%; text-align: center;">
+	
+	<tr>
+		<td colspan="3">
+			<p>&nbsp;</p>
+			<p align="center"><b>Euro Tech Corporation Kft.</b><br>
+			6724-H Szeged, Üstökös u. 12/b<br>
+			Tel/Fax: +36 62 458 585<br>
+			Technical background / Service: +36 70 439 8802<br>
+			E-mail: <a href="mailto:eurotech@videosec.com" style="color:#461724; font-weight:bold;">eurotech@videosec.com</a><br>
+			Web: <a href="https://videosec.com/?lp=RjanFeb" style="color:#461724; font-weight:bold;" target="_blank">www.videosec.com</a><br>
+			</p>
+			<table width="100%"><tbody><tr><td height="3" style="border-bottom: 3px solid #4f4f4f; width:100%"></td></tr></tbody></table>
+			<p class="text-small-black">to unsubscribe from our newsletter contact us at<br>
+			<a href="mailto:unsubscribe.videosec@gmail.com" style="color:#461724; font-weight:bold;">unsubscribe.videosec@gmail.com</a></p>
+		</td>
+	</tr>
+	</tbody>
+</table>
+
+
+
+</body></html>
